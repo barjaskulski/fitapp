@@ -9,7 +9,6 @@ id;
 user_id;
 name;
 receipt;
-is_default;
 
 MealIngredient
 id;
