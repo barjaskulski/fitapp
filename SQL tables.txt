@@ -1,24 +1,28 @@
 User
-id;
-username;
-password;
-email;
+id BIGINT;
+username VARCHAR;
+password VARCHAR;
+email VARCHAR;
 
 Meal
-id;
-user_id;
-name;
-receipt;
+id BIGINT;
+user_id BIGINT;
+meal_description_id BIGINT;
+
+MealDescription
+id BIGINT;
+name VARCHAR;
+receipt VARCHAR;
 
 MealIngredient
-id;
-meal_id;
-ingredient_id;
-ingredient_count;
+id BIGINT;
+meal_id BIGINT;
+ingredient_id BIGINT;
+ingredient_count INT;
 
 Ingredient
-id;
-name;
-fat;
-protein;
-carbohydrates;
+id BIGINT;
+name VARCHAR;
+fat INT;
+protein INT;
+carbohydrates INT;
