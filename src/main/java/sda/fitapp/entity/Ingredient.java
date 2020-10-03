@@ -14,7 +14,7 @@ import javax.persistence.Id;
 @Data
 @Builder
 @NoArgsConstructor
-public class Ingredients {
+public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
