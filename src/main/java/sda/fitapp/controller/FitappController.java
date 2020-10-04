@@ -1,26 +1,35 @@
 package sda.fitapp.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import sda.fitapp.dto.UserResponse;
+import sda.fitapp.dto.*;
 
+@Slf4j
 @RestController
 public class FitappController {
 
     @GetMapping("/users")
     public UserResponse getUser() {
-        return UserResponse.builder()
-                .firstName("fname")
-                .lastName("lname")
-                .email("email@pl")
-                .phoneNumber("121 121")
-                .age(22)
-                .height(184)
-                .weight(55)
-                .lifestyle(5)
-                .caloricDemand(2500)
-                .numberOfMeals(3)
-                .showQuestionnaire(true)
-                .build();
+        return new UserResponse(
+                "fname",
+                "lname",
+                "email@pl",
+                "121 121",
+                22,
+                184,
+                55,
+                5,
+                2500,
+                3,
+                true
+        );
+    }
+
+    @PostMapping("/questionnaire")
+    public void addQuestionnaire(@RequestBody QuestionnaireDto questionnaire) {
+        log.info("questionnaire: {}", questionnaire.getAge());
     }
 }
