@@ -15,7 +15,6 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    //@Column(name = "id")
     @Setter(AccessLevel.NONE)private int userId;            //--- to be automatically generated
     private String userEmail;                               //--- login
     private String userPassword;                            //--- password
