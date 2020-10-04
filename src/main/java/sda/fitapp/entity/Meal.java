@@ -24,7 +24,7 @@ public class Meal {
             joinColumns = {@JoinColumn(name = "meal_id", referencedColumnName = "id")})
     @MapKeyColumn(name = "recipeName")
     @Column(name = "proportion")
-    private Map<String, Float> listOfIngredients = new HashMap<>();
+    private Map<String, Double> listOfIngredients = new HashMap<>();
     private boolean lowIg;
     private boolean vegetarian;
     private boolean vegan;
