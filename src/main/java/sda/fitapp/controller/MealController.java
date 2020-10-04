@@ -1,6 +1,5 @@
 package sda.fitapp.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sda.fitapp.entity.Meal;
@@ -17,9 +16,8 @@ public class MealController {
     }
 
     @PostMapping()
-    public Meal addMeal (@RequestBody Meal meal){
+    public Meal addMeal(@RequestBody Meal meal) {
         return mealRepositories.save(meal);
     }
-
 
 }

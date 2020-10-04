@@ -1,6 +1,5 @@
 package sda.fitapp.services;
 
-
 import org.springframework.stereotype.Service;
 
 @Service
