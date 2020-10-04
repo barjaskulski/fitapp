@@ -1,8 +1,6 @@
 package sda.fitapp.entity;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +9,9 @@ import javax.persistence.Id;
 import java.util.Map;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 @Builder
 @NoArgsConstructor
 public class Meal {
@@ -20,7 +20,7 @@ public class Meal {
     private long id;
     private String name;
     private String recepture;
-    private Map<Ingredients, Long> listOfIngredients;
+    //private Map<Ingredient, Long> listOfIngredients;
     private boolean lowIg;
     private boolean vegetarian;
     private boolean vegan;

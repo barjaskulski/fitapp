@@ -1,9 +1,6 @@
 package sda.fitapp.entity;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 @Builder
 @NoArgsConstructor
 public class Ingredient {
