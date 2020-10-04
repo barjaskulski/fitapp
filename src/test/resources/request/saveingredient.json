@@ -1,0 +1,10 @@
+{
+  "name": "test",
+  "kcal100g": 100,
+  "gramsOfProteins": 100,
+  "gramsOfCarbs": 100,
+  "gramsOfFats": 100,
+  "proteinProduct": true,
+  "carbProduct": true,
+  "fatProduct": true
+}
