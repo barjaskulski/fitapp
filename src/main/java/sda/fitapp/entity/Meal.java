@@ -1,20 +1,19 @@
 package sda.fitapp.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
 
 @Entity
-@Data
-@Table(name = "meals")
+@Getter
+@Setter
+@AllArgsConstructor
+@Builder
+@NoArgsConstructor
 public class Meal {
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     private String name;
@@ -29,5 +28,4 @@ public class Meal {
     private boolean vegetarian;
     private boolean vegan;
     private boolean glutenFree;
-
 }

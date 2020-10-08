@@ -5,12 +5,14 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Data
-@Table(name = "ingredient")
+@Getter
+@Setter
+@AllArgsConstructor
+@Builder
+@NoArgsConstructor
 public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
     private long id;
     private String name;
     private double kcal100g;
