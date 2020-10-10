@@ -27,9 +27,10 @@ public class Meal {
 //    @Column(name = "proportion")
 //    private Map<String, Double> listOfIngredients = new HashMap<>();
     @OneToMany
+    @JoinColumn(name = "id_ingdrient_to_proportion")
     private List<WrapperIngredientToProportion> listOfIngredients = new ArrayList<>();
     private boolean lowIg;
     private boolean vegetarian;
     private boolean vegan;
-    private boolean glutenFree;
+    private boolean GLUTENFREE;
 }

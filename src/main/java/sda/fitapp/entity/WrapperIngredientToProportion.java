@@ -4,19 +4,16 @@ package sda.fitapp.entity;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 @Data
 public class WrapperIngredientToProportion {
     @Id
     @GeneratedValue
-    private String id;
-
+    private int id;
     @ManyToOne
+    @JoinColumn(name = "id_ingredient")
     private Ingredient ingredient;
     private Double proportion;
 
