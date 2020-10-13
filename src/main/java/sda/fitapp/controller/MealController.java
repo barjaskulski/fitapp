@@ -3,7 +3,7 @@ package sda.fitapp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sda.fitapp.entity.Meal;
-import sda.fitapp.repositories.MealRepositories;
+import sda.fitapp.repository.MealRepositories;
 
 @RestController
 @RequestMapping("/api/meal")

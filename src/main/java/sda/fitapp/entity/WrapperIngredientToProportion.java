@@ -1,21 +1,23 @@
 package sda.fitapp.entity;
 
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@Builder
+@NoArgsConstructor
 public class WrapperIngredientToProportion {
     @Id
     @GeneratedValue
-    private int id;
+    Long id;
     @ManyToOne
     @JoinColumn(name = "id_ingredient")
-    private Ingredient ingredient;
-    private Double proportion;
-
+    Ingredient ingredient;
+    Double proportion;
 
 }

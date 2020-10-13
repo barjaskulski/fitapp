@@ -28,9 +28,12 @@ public class Meal {
 //    private Map<String, Double> listOfIngredients = new HashMap<>();
     @OneToMany
     @JoinColumn(name = "id_ingdrient_to_proportion")
-    private List<WrapperIngredientToProportion> listOfIngredients = new ArrayList<>();
+    private List<WrapperIngredientToProportion> wrapperIngredientToProportionList = new ArrayList<>();
     private boolean lowIg;
     private boolean vegetarian;
     private boolean vegan;
     private boolean GLUTENFREE;
+
+    //W ten sposób musze dodawać istniejące ingdienty
+//    więc kurwa nie dziwne że się jebie
 }
