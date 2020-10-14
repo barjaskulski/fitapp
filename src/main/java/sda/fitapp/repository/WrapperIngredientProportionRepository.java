@@ -6,5 +6,6 @@ import sda.fitapp.entity.WrapperIngredientToProportion;
 
 
 @Repository
-public interface WrapperRepositories extends JpaRepository<WrapperIngredientToProportion,Long> {
+public interface WrapperIngredientProportionRepository
+        extends JpaRepository<WrapperIngredientToProportion,Long> {
 }
