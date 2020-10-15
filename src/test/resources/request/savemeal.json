@@ -1,7 +1,14 @@
 {
         "glutenFree": true,
         "id": 0,
-        "listOfIngredients": {},
+        "listOfIngredients": [
+                {
+                        "ingredient": {
+
+                        },
+                        "proportion": 1.0
+                }
+        ],
         "lowIg": true,
         "name": "wiadro",
         "recepture": "string",

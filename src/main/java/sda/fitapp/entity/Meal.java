@@ -20,12 +20,6 @@ public class Meal {
     private long id;
     private String name;
     private String recepture;
-//    @ElementCollection
-//    @CollectionTable(name = "meal_recepie_mapping",
-//            joinColumns = {@JoinColumn(name = "meal_id", referencedColumnName = "id")})
-//    @MapKeyColumn(name = "recipeName")
-//    @Column(name = "proportion")
-//    private Map<String, Double> listOfIngredients = new HashMap<>();
     @OneToMany
     @JoinColumn(name = "id_ingdrient_to_proportion")
     private List<WrapperIngredientToProportion> wrapperIngredientToProportionList = new ArrayList<>();
