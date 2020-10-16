@@ -1,4 +1,4 @@
-package sda.fitapp.services;
+package sda.fitapp.service;
 
 
 import org.springframework.stereotype.Service;

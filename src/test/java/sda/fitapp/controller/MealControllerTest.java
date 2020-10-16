@@ -1,14 +1,18 @@
 package sda.fitapp.controller;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -20,17 +24,45 @@ class MealControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    @Test
-    void addMeal() throws Exception {
+    @BeforeEach
+    void setUp() throws Exception {
 
-        String s = new String(Files.readAllBytes(Paths.get("src/test/resources/request/savemeal.json")));
+        String ingredientString = new String(Files.readAllBytes(Paths.get("src/test/resources/request/saveingredient.json")));
+
+        mvc.perform(
+                post("/ingredient")
+                        .header("content-type", "application/json")
+                        .content(ingredientString));
+        mvc.perform(
+                post("/ingredient")
+                        .header("content-type", "application/json")
+                        .content(ingredientString));
+
+    }
+
+    @Test
+    void addMealTest() throws Exception {
+
+        String mealString = new String(Files.readAllBytes(Paths.get("src/test/resources/request/savemeal.json")));
         mvc.perform(
                 post("/api/meal")
                         .header("content-type", "application/json")
-                        .content(s))
+                        .content(mealString))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{'id': 1}"));
+                .andExpect(content().json("{'id': 5}"));
+    }
 
+    @Test
+    void getMealTest() throws Exception {
+        String mealString = new String(Files.readAllBytes(Paths.get("src/test/resources/request/savemeal.json")));
+        mvc.perform(
+                post("/api/meal")
+                        .header("content-type", "application/json")
+                        .content(mealString));
+        mvc.perform(
+                get("/api/meal"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("[{'id': 5},{}]"));
 
     }
 

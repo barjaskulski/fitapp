@@ -1,17 +1,18 @@
 {
-        "glutenFree": true,
-        "id": 0,
-        "listOfIngredients": [
+        "glutenfree": true,
+        "ingredientWithProportions": [
                 {
-                        "ingredient": {
-
-                        },
-                        "proportion": 1.0
+                        "ingredientId": 1,
+                        "proportion": 12
+                },
+                {
+                        "ingredientId": 2,
+                        "proportion": 1.1
                 }
         ],
         "lowIg": true,
-        "name": "wiadro",
-        "recepture": "string",
+        "name": "string",
+        "recipe": "string",
         "vegan": true,
         "vegetarian": true
 }

@@ -28,6 +28,4 @@ public class Meal {
     private boolean vegan;
     private boolean GLUTENFREE;
 
-    //W ten sposób musze dodawać istniejące ingdienty
-//    więc kurwa nie dziwne że się jebie
 }
