@@ -67,7 +67,7 @@ class IngredientControllerTest {
                         .header("content-type", "application/json")
                         .content(s))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{'id': 1}"));
+                .andExpect(content().json("{'id': 6}"));
     }
 
 }
