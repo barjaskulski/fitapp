@@ -1,19 +1,17 @@
 package sda.fitapp.entity;
 
-import lombok.*;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
 
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@Builder
-@NoArgsConstructor
+@Data
+@Table(name = "meals")
 public class Meal {
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     private String name;
@@ -23,9 +21,10 @@ public class Meal {
             joinColumns = {@JoinColumn(name = "meal_id", referencedColumnName = "id")})
     @MapKeyColumn(name = "recipeName")
     @Column(name = "proportion")
-    private Map<String, Double> listOfIngredients = new HashMap<>();
+    private Map<String, Float> listOfIngredients = new HashMap<>();
     private boolean lowIg;
     private boolean vegetarian;
     private boolean vegan;
     private boolean glutenFree;
+
 }
