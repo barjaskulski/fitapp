@@ -1,12 +1,19 @@
 package sda.fitapp.controller;
 
 import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import sda.fitapp.dto.QuestionnaireDto;
+import sda.fitapp.dto.UserResponse;
+import sda.fitapp.entity.LifeStyle;
+import sda.fitapp.entity.ServiceRoles;
 import sda.fitapp.entity.User;
+import sda.fitapp.entity.UserSex;
 import sda.fitapp.service.UserService;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 public class UserController {
     private final UserService userService;
@@ -33,5 +40,15 @@ public class UserController {
     @DeleteMapping("/users/{userId}")
     public void removeUserById(@PathVariable long userId) {
         userService.removeUserById(userId);
+    }
+
+    @GetMapping("/users/currentUser")               //----------------------------- for front end dev
+    public User getCurrentUser() {
+        return new User(1,"email@pl","password");
+    }
+
+    @PostMapping("/questionnaire")                  //----------------------------- for front end dev
+    public void addQuestionnaire(@RequestBody QuestionnaireDto questionnaire) {
+        log.info("questionnaire: {}", questionnaire.getAge());
     }
 }
