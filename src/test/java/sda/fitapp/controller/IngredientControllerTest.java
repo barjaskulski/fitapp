@@ -1,12 +1,16 @@
 package sda.fitapp.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import sda.fitapp.entity.Ingredient;
+import sda.fitapp.repository.JpaIngredientRepository;
 import sda.fitapp.service.IngredientService;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -29,6 +33,10 @@ class IngredientControllerTest {
 
     @Autowired
     private IngredientService ingredientService;
+
+    @Autowired
+    private JpaIngredientRepository repository;
+
 
     @Test
     void shouldReturnAllIngredients() throws Exception {
@@ -56,18 +64,29 @@ class IngredientControllerTest {
         mvc.perform(get("/ingredient"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(jsonResult));
+
     }
 
     @Test
-    void addIngredient() throws Exception {
+    void shouldReturnOneIngredientWithIndicatedId() throws Exception {
 
-        String s = new String(Files.readAllBytes(Paths.get("src/test/resources/request/saveingredient.json")));
+        //given
+        String s = new String(Files.readAllBytes(Paths.get("src/test/resources/request/saveingredientwithid.json")));
+
+        //when
         mvc.perform(
                 post("/ingredient")
                         .header("content-type", "application/json")
                         .content(s))
+                .andExpect(status().isOk());
+
+        //then
+        mvc.perform(
+                get("/ingredient/1")
+                        .header("content-type", "application/json")
+                        .content(s))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{'id': 6}"));
+                .andExpect(content().json("{'id':1}"));
     }
 
 }

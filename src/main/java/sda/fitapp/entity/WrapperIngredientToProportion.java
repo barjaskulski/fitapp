@@ -11,9 +11,10 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @NoArgsConstructor
+@SequenceGenerator(name = "ingredientwrapper_seq")
 public class WrapperIngredientToProportion {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "ingredientwrapper_seq")
     Long id;
     @ManyToOne
     @JoinColumn(name = "id_ingredient")

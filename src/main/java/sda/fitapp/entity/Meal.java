@@ -14,9 +14,10 @@ import java.util.Map;
 @AllArgsConstructor
 @Builder
 @NoArgsConstructor
+@SequenceGenerator(name = "meal_seq")
 public class Meal {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "meal_seq")
     private long id;
     private String name;
     private String recepture;
