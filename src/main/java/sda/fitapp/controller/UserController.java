@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 public class UserController {
-    private UserService userService;
+    private final UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -20,9 +20,9 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/users/{id}")
-    public User getUserById(@PathVariable long id) {
-        return userService.getUserById(id);
+    @GetMapping("/users/{userId}")
+    public User getUserById(@PathVariable long userId) {
+        return userService.getUserById(userId);
     }
 
     @PostMapping("/users")
@@ -30,8 +30,8 @@ public class UserController {
         return userService.addUser(user);
     }
 
-    @DeleteMapping("/users/{id}")
-    public void removeUserById(@PathVariable long id) {
-        userService.removeUserById(id);
+    @DeleteMapping("/users/{userId}")
+    public void removeUserById(@PathVariable long userId) {
+        userService.removeUserById(userId);
     }
 }

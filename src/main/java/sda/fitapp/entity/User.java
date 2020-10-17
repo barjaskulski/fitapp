@@ -15,7 +15,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Setter(AccessLevel.NONE)private int userId;            //--- to be automatically generated
+    private long userId;            //--- to be automatically generated
     private String userEmail;                               //--- login
     private String userPassword;                            //--- password
     private ServiceRoles serviceRoles;                      //--- to be assigned by admin after acc and payment verification
