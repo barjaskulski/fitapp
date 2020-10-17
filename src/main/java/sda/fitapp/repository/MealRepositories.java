@@ -1,8 +1,9 @@
-package sda.fitapp.repositories;
+package sda.fitapp.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import sda.fitapp.entity.Ingredient;
+import org.springframework.stereotype.Repository;
 import sda.fitapp.entity.Meal;
 
+@Repository
 public interface MealRepositories extends JpaRepository<Meal,Long> {
 }

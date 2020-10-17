@@ -1,33 +1,31 @@
 package sda.fitapp.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Entity
-@Data
-@Table(name = "meals")
+@Getter
+@Setter
+@AllArgsConstructor
+@Builder
+@NoArgsConstructor
 public class Meal {
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     private String name;
     private String recepture;
-    @ElementCollection
-    @CollectionTable(name = "meal_recepie_mapping",
-            joinColumns = {@JoinColumn(name = "meal_id", referencedColumnName = "id")})
-    @MapKeyColumn(name = "recipeName")
-    @Column(name = "proportion")
-    private Map<String, Double> listOfIngredients = new HashMap<>();
+    @OneToMany
+    @JoinColumn(name = "id_ingdrient_to_proportion")
+    private List<WrapperIngredientToProportion> wrapperIngredientToProportionList = new ArrayList<>();
     private boolean lowIg;
     private boolean vegetarian;
     private boolean vegan;
-    private boolean glutenFree;
+    private boolean GLUTENFREE;
 
 }
