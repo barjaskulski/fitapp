@@ -47,7 +47,7 @@ class MealControllerTest {
                         .header("content-type", "application/json")
                         .content(mealString))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{'id': 5}"));
+                .andExpect(content().json("{'id': 1}"));
     }
 
     @Test
@@ -60,7 +60,7 @@ class MealControllerTest {
         mvc.perform(
                 get("/api/meal"))
                 .andExpect(status().isOk())
-                .andExpect(content().json("[{'id': 5},{}]"));
+                .andExpect(content().json("[{'id': 1},{}]"));
 
     }
 

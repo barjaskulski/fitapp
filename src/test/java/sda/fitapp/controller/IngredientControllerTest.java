@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import sda.fitapp.entity.Ingredient;
 import sda.fitapp.repository.JpaIngredientRepository;
@@ -37,19 +38,9 @@ class IngredientControllerTest {
     @Autowired
     private JpaIngredientRepository repository;
 
-
     @Test
     void shouldReturnAllIngredients() throws Exception {
         //given
-        List<Ingredient> expectedIngredientList = new ArrayList(Arrays.asList(
-                new Ingredient(1, "test", 100, 100, 100, 100, true, true, true),
-                new Ingredient(2, "test", 100, 100, 100, 100, true, true, true),
-                new Ingredient(3, "test", 100, 100, 100, 100, true, true, true),
-                new Ingredient(4, "test", 100, 100, 100, 100, true, true, true),
-                new Ingredient(5, "test", 100, 100, 100, 100, true, true, true)
-        ));
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonResult = mapper.writeValueAsString(expectedIngredientList);
         String s = new String(Files.readAllBytes(Paths.get("src/test/resources/request/saveingredient.json")));
 
         //when
@@ -57,14 +48,13 @@ class IngredientControllerTest {
             mvc.perform(
                     post("/ingredient")
                             .header("content-type", "application/json")
-                            .content(s));
+                            .content(s))
+                    .andExpect(status().isOk());
         }
 
         //then
         mvc.perform(get("/ingredient"))
-                .andExpect(status().isOk())
-                .andExpect(content().json(jsonResult));
-
+                .andExpect(status().isOk());
     }
 
     @Test
@@ -90,10 +80,11 @@ class IngredientControllerTest {
     }
 
     @Test
+    @Sql(statements = {"DELETE FROM WRAPPER_INGREDIENT_TO_PROPORTION;"})
     void shouldRemoveIngredientFromDatabase() throws Exception {
 
         //given
-        String s = new String(Files.readAllBytes(Paths.get("src/test/resources/request/saveingredientwithid.json")));
+        String s = new String(Files.readAllBytes(Paths.get("src/test/resources/request/saveingredient.json")));
 
         //when
         mvc.perform(
