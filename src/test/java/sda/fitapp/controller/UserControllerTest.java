@@ -31,8 +31,10 @@ class UserControllerTest {
 
     @Test
     void getAllUsers() throws Exception {
-        User user1 = new User(1, "emailjakis", "jakieshaslo");
-        User user2 = new User(2, "emailjakis", "jakieshaslo");
+        User user1 = new User(1, "emailjakis", "jakieshaslo",
+                "imie", "nazwisko", true);
+        User user2 = new User(2, "emailjakis", "jakieshaslo",
+                "imie", "nazwisko", true);
 
         mockMvc.perform(get("/users"))
                 .andExpect(status().isOk());
