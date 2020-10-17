@@ -27,5 +27,9 @@ public class Meal {
     private boolean vegetarian;
     private boolean vegan;
     private boolean GLUTENFREE;
+    private long valueOfKcal;
+    private long valueOfProteins;
+    private long valueOfCarbs;
+    private long valueOfFats;
 
 }
