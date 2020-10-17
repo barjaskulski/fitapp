@@ -13,11 +13,11 @@ import sda.fitapp.entity.Ingredient;
 import sda.fitapp.repository.JpaIngredientRepository;
 import sda.fitapp.service.IngredientService;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -87,6 +87,28 @@ class IngredientControllerTest {
                         .content(s))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{'id':1}"));
+    }
+
+    @Test
+    void shouldRemoveIngredientFromDatabase() throws Exception {
+
+        //given
+        String s = new String(Files.readAllBytes(Paths.get("src/test/resources/request/saveingredientwithid.json")));
+
+        //when
+        mvc.perform(
+                post("/ingredient")
+                        .header("content-type", "application/json")
+                        .content(s))
+                .andExpect(status().isOk());
+
+        //then
+        mvc.perform(
+                delete("/ingredient/1")
+                        .header("content-type", "application/json")
+                        .content(s))
+                .andExpect(status().isOk());
+
     }
 
 }
