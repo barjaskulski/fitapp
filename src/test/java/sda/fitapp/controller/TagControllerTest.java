@@ -104,7 +104,7 @@ class TagControllerTest {
                             .content(s));
         }
         //then
-        mvc.perform(get("/api/tag/name/4"))
+        mvc.perform(get("/api/tag/name/wiadro"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(s));
 
