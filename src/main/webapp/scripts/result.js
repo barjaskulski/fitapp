@@ -1,4 +1,4 @@
-export function dispalyResultPage() {
+export function displayResultPage() {
     let pageContent = `
         
         RESULT

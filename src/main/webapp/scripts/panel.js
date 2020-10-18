@@ -1,8 +1,8 @@
-import { dispalyQuestionnairePage } from "./questionnaire.js";
-import { dispalyReportPage } from "./report.js";
-import { dispalyDietPage } from "./diet.js";
-import { dispalyTreningPage } from "./trening.js";
-import { dispalyResultPage } from "./result.js";
+import { displayQuestionnairePage } from "./questionnaire.js";
+import { displayReportPage } from "./report.js";
+import { displayDietPage } from "./diet.js";
+import { displayTrainingPage } from "./training.js";
+import { displayResultPage } from "./result.js";
 
 import { sendRequest } from "./request.js";
 
@@ -18,7 +18,7 @@ export function displayPanel() {
                 <div class="btn-group-vertical" role="group" aria-label="Basic example">
                     <button type="button" id="report_button" class="btn btn-secondary" btn-lg">Raport</button>
                     <button type="button" id="diet_button" class="btn btn-secondary" btn-lg">Twoja dieta</button>
-                    <button type="button" id="trening_button" class="btn btn-secondary" btn-lg">Trening/aktywność</button>
+                    <button type="button" id="training_button" class="btn btn-secondary" btn-lg">Trening/aktywność</button>
                     <button type="button" id="results_button" class="btn btn-secondary" btn-lg">Podsumowanie wyników</button>
                 </div>
             </div>
@@ -30,12 +30,12 @@ export function displayPanel() {
 
     document.getElementById("root").innerHTML = pageContent;
 
-    document.getElementById("report_button").onclick = dispalyReportPage;
-    document.getElementById("diet_button").onclick = dispalyDietPage;
-    document.getElementById("trening_button").onclick = dispalyTreningPage;
-    document.getElementById("results_button").onclick = dispalyResultPage;
+    document.getElementById("report_button").onclick = displayReportPage;
+    document.getElementById("diet_button").onclick = displayDietPage;
+    document.getElementById("training_button").onclick = displayTrainingPage;
+    document.getElementById("results_button").onclick = displayResultPage;
 
-    sendRequest("GET", "/users", null, null, getUsernameCallback);
+    sendRequest("GET", "/users/current_user", null, null, getUsernameCallback);
 }
 
 function getUsernameCallback() {
@@ -46,6 +46,6 @@ function getUsernameCallback() {
     if(body.showQuestionnaire) {
         document.getElementById("questionnaire").innerHTML = 
             `<button type="button" id="questionnaire_button" class="btn btn-primary" btn-lg">Pierwsza ankieta</button>`;
-        document.getElementById("questionnaire_button").onclick = dispalyQuestionnairePage;
+        document.getElementById("questionnaire_button").onclick = displayQuestionnairePage;
     }
 }

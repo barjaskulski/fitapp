@@ -1,19 +1,24 @@
 package sda.fitapp.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import sda.fitapp.entity.Ingredient;
+import sda.fitapp.repository.JpaIngredientRepository;
 import sda.fitapp.service.IngredientService;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -30,18 +35,12 @@ class IngredientControllerTest {
     @Autowired
     private IngredientService ingredientService;
 
+    @Autowired
+    private JpaIngredientRepository repository;
+
     @Test
     void shouldReturnAllIngredients() throws Exception {
         //given
-        List<Ingredient> expectedIngredientList = new ArrayList(Arrays.asList(
-                new Ingredient(1, "test", 100, 100, 100, 100, true, true, true),
-                new Ingredient(2, "test", 100, 100, 100, 100, true, true, true),
-                new Ingredient(3, "test", 100, 100, 100, 100, true, true, true),
-                new Ingredient(4, "test", 100, 100, 100, 100, true, true, true),
-                new Ingredient(5, "test", 100, 100, 100, 100, true, true, true)
-        ));
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonResult = mapper.writeValueAsString(expectedIngredientList);
         String s = new String(Files.readAllBytes(Paths.get("src/test/resources/request/saveingredient.json")));
 
         //when
@@ -49,25 +48,58 @@ class IngredientControllerTest {
             mvc.perform(
                     post("/ingredient")
                             .header("content-type", "application/json")
-                            .content(s));
+                            .content(s))
+                    .andExpect(status().isOk());
         }
 
         //then
         mvc.perform(get("/ingredient"))
-                .andExpect(status().isOk())
-                .andExpect(content().json(jsonResult));
+                .andExpect(status().isOk());
     }
 
     @Test
-    void addIngredient() throws Exception {
+    void shouldReturnOneIngredientWithIndicatedId() throws Exception {
 
-        String s = new String(Files.readAllBytes(Paths.get("src/test/resources/request/saveingredient.json")));
+        //given
+        String s = new String(Files.readAllBytes(Paths.get("src/test/resources/request/saveingredientwithid.json")));
+
+        //when
         mvc.perform(
                 post("/ingredient")
                         .header("content-type", "application/json")
                         .content(s))
+                .andExpect(status().isOk());
+
+        //then
+        mvc.perform(
+                get("/ingredient/1")
+                        .header("content-type", "application/json")
+                        .content(s))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{'id': 6}"));
+                .andExpect(content().json("{'id':1}"));
+    }
+
+    @Test
+    @Sql(statements = {"DELETE FROM WRAPPER_INGREDIENT_TO_PROPORTION;"})
+    void shouldRemoveIngredientFromDatabase() throws Exception {
+
+        //given
+        String s = new String(Files.readAllBytes(Paths.get("src/test/resources/request/saveingredient.json")));
+
+        //when
+        mvc.perform(
+                post("/ingredient")
+                        .header("content-type", "application/json")
+                        .content(s))
+                .andExpect(status().isOk());
+
+        //then
+        mvc.perform(
+                delete("/ingredient/1")
+                        .header("content-type", "application/json")
+                        .content(s))
+                .andExpect(status().isOk());
+
     }
 
 }

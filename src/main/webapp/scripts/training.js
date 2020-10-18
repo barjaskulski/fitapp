@@ -1,4 +1,4 @@
-export function dispalyTreningPage() {
+export function displayTrainingPage() {
     let pageContent = `
 
         
