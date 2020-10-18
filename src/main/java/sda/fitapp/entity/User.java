@@ -1,9 +1,6 @@
 package sda.fitapp.entity;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -11,6 +8,7 @@ import javax.persistence.*;
 @Data
 //@Table(name = "users")
 @Getter @Setter
+@AllArgsConstructor
 public class User {
 
     @Id
@@ -25,12 +23,11 @@ public class User {
     private UserSex userSex;                                //--- user defined after acc creation
     private String userPhoneNumber;                         //--- user defined after acc creation
     private int userAge;                                    //--- user defined after acc creation
-    private Double userHeight;                              //--- user defined after acc creation
+    private long userHeight;                              //--- user defined after acc creation
     private Double userWeight;                              //--- user defined after acc creation
-    private Double userCaloricDemand;                       //--- to be automatically calculated based on age/weight/lifestyle
-    private Double userCaloricDeficit;                      //--- to be set by coach
+    private long userCaloricDeficit;                      //--- to be set by coach
     private LifeStyle lifeStyle;                            //--- user defined after acc creation
-    private int userMealCount;                              //--- to be set by coach
+
 
     public User() {
     }
@@ -40,4 +37,5 @@ public class User {
         this.userEmail = userEmail;
         this.userPassword = userPassword;
     }
+
 }
