@@ -3,10 +3,7 @@ package sda.fitapp.entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -20,5 +17,6 @@ public class Tag {
     @GeneratedValue
     long id;
     String name;
+    @Enumerated(EnumType.STRING)
     TagsType tagsType;
 }
