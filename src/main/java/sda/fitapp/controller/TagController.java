@@ -33,9 +33,9 @@ public class TagController {
     public List<Tag> getAllTags(){
         return tagRepository.findAll();
     }
-    @GetMapping
-    public Tag getTagById(Long id){
-        return tagRepository.findById(id).orElseThrow(NoSuchElementException::new);
-    }
+//    @GetMapping
+//    public Tag getTagById(Long id){
+//        return tagRepository.findById(id).orElseThrow(NoSuchElementException::new);
+//    }
 
 }

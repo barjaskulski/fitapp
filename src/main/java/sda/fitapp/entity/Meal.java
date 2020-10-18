@@ -4,9 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 @Getter
@@ -27,5 +25,12 @@ public class Meal {
     private boolean vegetarian;
     private boolean vegan;
     private boolean GLUTENFREE;
+    @ManyToMany
+    @JoinTable(
+            name = "tags_meals",
+            joinColumns = { @JoinColumn(name = "meal_id") },
+            inverseJoinColumns = { @JoinColumn(name = "tag_id") }
+    )
+    private List<Tag> tagList = new ArrayList<>();
 
 }

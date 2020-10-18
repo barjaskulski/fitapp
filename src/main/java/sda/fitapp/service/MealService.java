@@ -60,4 +60,11 @@ public class MealService {
         return mealRepositories.findById(id).orElseThrow(() ->
                 new RuntimeException("No such meal with input id"));
     }
+
+    public void connectTag(Long idMeal,Long idTags ){
+        mealRepositories.findById(idMeal);
+    }
+
+
+
 }
