@@ -61,7 +61,8 @@ class UserControllerTest {
                         .header("content-type", "application/json")
                         .content(s))
                 .andExpect(status().isOk())
-        .andExpect(content().json("{\"userId\":1,\"userEmail\":\"jakis mail\",\"userPassword\":\"jakies haslo\",\"serviceRoles\":null,\"userName\":null,\"userSurname\":null,\"userSex\":null,\"userPhoneNumber\":null,\"userAge\":0,\"userHeight\":null,\"userWeight\":null,\"userCaloricDemand\":null,\"userCaloricDeficit\":null,\"lifeStyle\":null,\"userMealCount\":0}"));
+//        .andExpect(content().json("{\"userId\":1,\"userEmail\":\"jakis mail\",\"userPassword\":\"jakies haslo\",\"serviceRoles\":null,\"userName\":null,\"userSurname\":null,\"userSex\":null,\"userPhoneNumber\":null,\"userAge\":0,\"userHeight\":null,\"userWeight\":null,\"userCaloricDemand\":null,\"userCaloricDeficit\":null,\"lifeStyle\":null,\"userMealCount\":0}"));
+        .andExpect(content().json("{}"));
     }
 
     @Test
