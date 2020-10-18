@@ -42,9 +42,10 @@ public class UserController {
         userService.removeUserById(userId);
     }
 
-    @GetMapping("/users/currentUser")               //----------------------------- for front end dev
+    @GetMapping("/users/current_user")               //----------------------------- for front end dev
     public User getCurrentUser() {
-        return new User(1,"email@pl","password");
+        return new User(1,"email@pl","password",
+                "firstN", "lastN", true);
     }
 
     @PostMapping("/questionnaire")                  //----------------------------- for front end dev

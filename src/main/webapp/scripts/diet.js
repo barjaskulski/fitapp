@@ -1,4 +1,4 @@
-export function dispalyDietPage() {
+export function displayDietPage() {
     let pageContent = `
         
         DIETA
