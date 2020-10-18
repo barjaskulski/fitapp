@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import sda.fitapp.entity.Tag;
 import sda.fitapp.entity.TagsType;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
@@ -73,24 +74,40 @@ class TagControllerTest {
     @Test
     void getTagById() throws Exception {
         //given
-        ObjectMapper mapper = new ObjectMapper();
         String s = new String(Files.readAllBytes(Paths.get("src/test/resources/request/savetag.json")));
 
         //when
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 5; i++) {
             mvc.perform(
                     post("/api/tag")
                             .header("content-type", "application/json")
                             .content(s));
         }
         //then
-        mvc.perform(get("/api/tag/1"))
+        mvc.perform(get("/api/tag/id/4"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(s));
 
     }
 
     @Test
-    void getTagByName() {
+    void getTagByName() throws Exception {
+
+        //given
+        String s = new String(Files.readAllBytes(Paths.get("src/test/resources/request/savetag.json")));
+
+        //when
+        for (int i = 0; i < 5; i++) {
+            mvc.perform(
+                    post("/api/tag")
+                            .header("content-type", "application/json")
+                            .content(s));
+        }
+        //then
+        mvc.perform(get("/api/tag/name/4"))
+                .andExpect(status().isOk())
+                .andExpect(content().json(s));
+
     }
+
 }

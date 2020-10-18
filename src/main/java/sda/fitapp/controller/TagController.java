@@ -23,19 +23,22 @@ public class TagController {
     }
 
     @PostMapping
-    public Tag addTag(@RequestBody Tag tag){
+    public Tag addTag(@RequestBody Tag tag) {
         return tagRepository.save(tag);
     }
+
     @GetMapping
-    public List<Tag> getAllTags(){
+    public List<Tag> getAllTags() {
         return tagRepository.findAll();
     }
-    @GetMapping("/api/tag/{id}")
-    public Tag getTagById(@RequestParam Long id){
+
+    @GetMapping("/id/{id}")
+    public Tag getTagById(@PathVariable Long id) {
         return tagRepository.findById(id).orElseThrow(NoSuchElementException::new);
     }
-    @GetMapping("/api/tag/{name}")
-    public Tag getTagByName(@RequestParam String name){
+
+    @GetMapping("/name/{name}")
+    public Tag getTagByName(@PathVariable String name) {
         return tagRepository.findFirstByName(name).orElseThrow(NoSuchElementException::new);
     }
 
