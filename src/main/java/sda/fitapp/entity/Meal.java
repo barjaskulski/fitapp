@@ -4,9 +4,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
+
 
 @Entity
 @Getter
@@ -26,10 +26,5 @@ public class Meal {
     private boolean lowIg;
     private boolean vegetarian;
     private boolean vegan;
-    private boolean GLUTENFREE;
-    private long valueOfKcal;
-    private long valueOfProteins;
-    private long valueOfCarbs;
-    private long valueOfFats;
-
+    private boolean glutenFree;
 }

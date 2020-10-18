@@ -2,48 +2,51 @@ package sda.fitapp.dto;
 
 import sda.fitapp.entity.Ingredient;
 import sda.fitapp.entity.Meal;
-import sda.fitapp.service.MealService;
-
-import java.util.ArrayList;
-import java.util.List;
+import sda.fitapp.entity.WrapperIngredientToProportion;
 
 public class MealResponse {
+    private Meal meal;
+    private String name = meal.getName();
+    private String recepture = meal.getRecepture();
+    private boolean lowIg = meal.isLowIg();
+    private boolean vegetarian = meal.isVegetarian();
+    private boolean vegan = meal.isVegan();
+    private boolean glutenFree = meal.isGlutenFree();
 
-    public Object mealKcalCalculation(Meal meal) {
-
+    public long getMealProteins() {
         long proteinCounter = 0;
-        long carbsCounter = 0;
-        long fatCounter = 0;
-        long mealValueOfKcal = proteinCounter * 4 + carbsCounter * 4 + fatCounter * 9;
-
-        List newValuesOfIngredients = new ArrayList();
-        int numbersOfIngredients = meal.getWrapperIngredientToProportionList().size();
-        for (int i = 0; i < numbersOfIngredients; i++) {
+        for (WrapperIngredientToProportion product : meal.getWrapperIngredientToProportionList()) {
             Ingredient newIngredietn = new Ingredient();
-            double proportion = (Double.valueOf(meal.getWrapperIngredientToProportionList().get(i).getProportion()) / 100);
-
-            newIngredietn.setKcal100g(Long.valueOf((long) (meal.getWrapperIngredientToProportionList().get(i).getIngredient().getKcal100g() * proportion)));
-            newIngredietn.setGramsOfProteins(Long.valueOf((long) (meal.getWrapperIngredientToProportionList().get(i).getIngredient().getGramsOfProteins() * proportion)));
-            newIngredietn.setGramsOfCarbs(Long.valueOf((long) (meal.getWrapperIngredientToProportionList().get(i).getIngredient().getGramsOfCarbs() * proportion)));
-            newIngredietn.setGramsOfFats(Long.valueOf((long) (meal.getWrapperIngredientToProportionList().get(i).getIngredient().getGramsOfFats() * proportion)));
+            double proportion = product.getProportion() / 100;
+            newIngredietn.setGramsOfProteins((long) (product.getIngredient().getGramsOfProteins() * proportion));
             proteinCounter = proteinCounter + newIngredietn.getGramsOfProteins();
-            carbsCounter = carbsCounter + newIngredietn.getGramsOfCarbs();
-            fatCounter = fatCounter + newIngredietn.getGramsOfFats();
-            newValuesOfIngredients.add(newIngredietn);
         }
-        Meal mealResult = new Meal();
+        return proteinCounter;
+    }
 
-        mealResult.setName(meal.getName());
-        mealResult.setRecepture(meal.getRecepture());
-        mealResult.setWrapperIngredientToProportionList(newValuesOfIngredients);
-        mealResult.setGLUTENFREE(meal.isGLUTENFREE());
-        mealResult.setLowIg(meal.isLowIg());
-        mealResult.setVegan(meal.isVegan());
-        mealResult.setVegetarian(meal.isVegetarian());
-        mealResult.setValueOfKcal(mealValueOfKcal);
-        mealResult.setValueOfProteins(proteinCounter);
-        mealResult.setValueOfCarbs(carbsCounter);
-        mealResult.setValueOfFats(fatCounter);
-        return mealResult;
+    public long getMealCarbs() {
+        long carbsCounter = 0;
+        for (WrapperIngredientToProportion product : meal.getWrapperIngredientToProportionList()) {
+            Ingredient newIngredietn = new Ingredient();
+            double proportion = product.getProportion() / 100;
+            newIngredietn.setGramsOfCarbs((long) (product.getIngredient().getGramsOfCarbs() * proportion));
+            carbsCounter = carbsCounter + newIngredietn.getGramsOfCarbs();
+        }
+        return carbsCounter;
+    }
+
+    public long getMealFats() {
+        long fatCounter = 0;
+        for (WrapperIngredientToProportion product : meal.getWrapperIngredientToProportionList()) {
+            Ingredient newIngredietn = new Ingredient();
+            double proportion = product.getProportion() / 100;
+            newIngredietn.setGramsOfFats((long) (product.getIngredient().getGramsOfFats() * proportion));
+            fatCounter = fatCounter + newIngredietn.getGramsOfFats();
+        }
+        return fatCounter;
+    }
+
+    public long getMealKcal() {
+        return (getMealProteins() * 4) + (getMealCarbs() * 4) + (getMealFats() * 9);
     }
 }
