@@ -1,5 +1,10 @@
 import { sendRequest } from "./request.js";
 
+var actualCalories = "0";
+var actualProtein = "0";
+var actualCarbon = "0";
+var actualFat = "0";
+
 export function displayDietPage() {
     let pageContent = `
         
@@ -21,8 +26,6 @@ export function displayDietPage() {
                     Dodaj obiad
                     </button>
                     <div class="dropdown-menu" id="lunch_list" aria-labelledby="dropdown_lunch">
-                        <button class="dropdown-item" type="button" id="breakfast_1">Śniadanie 1</button>
-                        <button class="dropdown-item" type="button" id="breakfast_1">Śniadanie 2</button>
                     </div>
                 </div>
             </div>
@@ -33,8 +36,6 @@ export function displayDietPage() {
                     Dodaj drugie śniadanie
                     </button>
                     <div class="dropdown-menu" id="second_breakfast_list" aria-labelledby="dropdown_second_breakfast">
-                        <button class="dropdown-item" type="button" id="breakfast_1">Śniadanie 1</button>
-                        <button class="dropdown-item" type="button" id="breakfast_1">Śniadanie 2</button>
                     </div>
                 </div>
                 <div class="dropdown">
@@ -43,8 +44,6 @@ export function displayDietPage() {
                     Dodaj kolację
                     </button>
                     <div class="dropdown-menu" id="dinner_list" aria-labelledby="dropdown_dinner">
-                        <button class="dropdown-item" type="button" id="breakfast_1">Śniadanie 1</button>
-                        <button class="dropdown-item" type="button" id="breakfast_1">Śniadanie 2</button>
                     </div>
                 </div>
             </div>
@@ -55,10 +54,10 @@ export function displayDietPage() {
             <div class="card-body">
                 <h5 class="card-title">Podsumowanie</h5>
                 <p class="card-text">
-                    Kalorie: 0/2000 kcal <br/>
-                    Białko: 0/160 g <br/>
-                    Węglowodany: 0/200 g <br/>
-                    Tłuszcze: 0/90 g <br/>
+                    Kalorie: <span id="actual_calories"></span>/<span id="caloric_demand"></span> kcal <br/>
+                    Białko: <span id="actual_protein"></span>/<span id="protein_demand"></span> g <br/>
+                    Węglowodany: <span id="actual_carbon"></span>/<span id="carbon_demand"></span> g <br/>
+                    Tłuszcze: <span id="actual_fat"></span>/<span id="fat_demand"></span> g <br/>
                 </p>
             </div>
         </div>
@@ -71,6 +70,11 @@ export function displayDietPage() {
     sendRequest("GET", "/api/meal/second_breakfast", null, null, getSecondBreakfastCallback);
     sendRequest("GET", "/api/meal/dinner", null, null, getLunchCallback);
     sendRequest("GET", "/api/meal/supper", null, null, getDinnerCallback);
+
+    sendRequest("GET", "/api/meal/summary", null, null, getDietSummaryCallback);
+
+    setDietSummaryValues();
+
 }
 
 function getBreakfastCallback() {
@@ -112,4 +116,34 @@ function getDinnerCallback() {
         list.push(`<button class="dropdown-item" type="button" id="dinner_${element.id}">${element.name}</button>`)
     );
     document.getElementById("dinner_list").innerHTML = list;
+}
+
+function getDietSummaryCallback() {
+    let body = JSON.parse(this.responseText);
+
+    if(body.caloricDemand != null) {
+        document.getElementById("caloric_demand").innerHTML = body.caloricDemand;
+    }
+
+    if(body.proteinDemand != null) {
+        document.getElementById("protein_demand").innerHTML = body.proteinDemand;
+    }
+
+    if(body.carbonDemand != null) {
+        document.getElementById("carbon_demand").innerHTML = body.carbonDemand;
+    }
+
+    if(body.fatDemand != null) {
+        document.getElementById("fat_demand").innerHTML = body.fatDemand;
+    }
+    
+}
+
+function setDietSummaryValues() {
+
+    document.getElementById("actual_calories").innerHTML = actualCalories;
+    document.getElementById("actual_protein").innerHTML = actualProtein;
+    document.getElementById("actual_carbon").innerHTML = actualCarbon;
+    document.getElementById("actual_fat").innerHTML = actualFat;
+
 }
