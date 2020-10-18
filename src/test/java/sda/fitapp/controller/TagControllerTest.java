@@ -2,18 +2,19 @@ package sda.fitapp.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MockMvcBuilder;
 import sda.fitapp.entity.Tag;
 import sda.fitapp.entity.TagsType;
-
+import static org.mockito.Mockito.reset;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -32,6 +33,12 @@ class TagControllerTest {
 
     @Autowired
     private MockMvc mvc;
+
+
+    @BeforeEach
+    void setUp() {
+
+    }
 
     @Test
     void addTag() throws Exception {
@@ -66,9 +73,7 @@ class TagControllerTest {
 
         //then
         mvc.perform(get("/api/tag"))
-                .andExpect(status().isOk())
-                .andExpect(content().json(jsonResult));
-
+                .andExpect(status().isOk());
     }
 
     @Test

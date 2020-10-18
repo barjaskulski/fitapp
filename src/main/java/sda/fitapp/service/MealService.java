@@ -13,6 +13,7 @@ import sda.fitapp.repository.WrapperIngredientProportionRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class MealService {
