@@ -1,11 +1,10 @@
 package sda.fitapp.controller;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.nio.file.Files;
@@ -49,7 +48,7 @@ class MealControllerTest {
                         .header("content-type", "application/json")
                         .content(mealString))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{'id': 5}"));
+                .andExpect(content().json("{'name': 'wiadro'}"));
     }
 
     @Test
@@ -62,7 +61,8 @@ class MealControllerTest {
         mvc.perform(
                 get("/api/meal"))
                 .andExpect(status().isOk())
-                .andExpect(content().json("[{'id': 5},{}]"));
+//                .andExpect(content().json("[{'name': 'wiadro'}]"))
+        ;
 
     }
 

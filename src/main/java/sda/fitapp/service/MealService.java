@@ -13,6 +13,7 @@ import sda.fitapp.repository.WrapperIngredientProportionRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class MealService {
@@ -60,4 +61,11 @@ public class MealService {
         return mealRepositories.findById(id).orElseThrow(() ->
                 new RuntimeException("No such meal with input id"));
     }
+
+    public void connectTag(Long idMeal,Long idTags ){
+        mealRepositories.findById(idMeal);
+    }
+
+
+
 }

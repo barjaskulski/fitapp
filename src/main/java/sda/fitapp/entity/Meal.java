@@ -4,9 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-
 import java.util.List;
-
 
 @Entity
 @Getter
@@ -14,9 +12,10 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @NoArgsConstructor
+@SequenceGenerator(name = "meal_seq")
 public class Meal {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "meal_seq")
     private long id;
     private String name;
     private String recepture;
@@ -26,5 +25,13 @@ public class Meal {
     private boolean lowIg;
     private boolean vegetarian;
     private boolean vegan;
-    private boolean glutenFree;
+    private boolean GLUTENFREE;
+    @ManyToMany
+    @JoinTable(
+            name = "tags_meals",
+            joinColumns = { @JoinColumn(name = "meal_id") },
+            inverseJoinColumns = { @JoinColumn(name = "tag_id") }
+    )
+    private List<Tag> tagList = new ArrayList<>();
+
 }

@@ -1,7 +1,6 @@
 package sda.fitapp.dto;
 
 import lombok.*;
-
 import java.util.List;
 
 @Getter
@@ -17,6 +16,7 @@ public class MealRequest {
     private boolean vegan;
     private boolean GLUTENFREE;
     private List<IngredientProportion> ingredientWithProportions;
+
 }
 
 

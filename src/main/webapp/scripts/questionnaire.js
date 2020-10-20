@@ -1,6 +1,6 @@
 import { sendRequest } from "./request.js";
 
-export function dispalyQuestionnairePage() {
+export function displayQuestionnairePage() {
     let pageContent = `
         <h3>Ankieta</h3> </br>
         Preferowane godziny kontaktu: <input type="text" class="form-control" id="contact_hours"><br/>

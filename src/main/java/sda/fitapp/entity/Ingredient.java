@@ -12,9 +12,10 @@ import static lombok.AccessLevel.*;
 @AllArgsConstructor(access = PUBLIC)
 @NoArgsConstructor
 @Table(name = "ingredient")
+@SequenceGenerator(name = "ingredient_seq")
 public class Ingredient {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ingredient_seq")
     @Column(name = "id")
     private long id;
     private String name;

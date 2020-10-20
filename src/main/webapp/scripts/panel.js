@@ -1,8 +1,8 @@
-import { dispalyQuestionnairePage } from "./questionnaire.js";
-import { dispalyReportPage } from "./report.js";
-import { dispalyDietPage } from "./diet.js";
-import { dispalyTreningPage } from "./trening.js";
-import { dispalyResultPage } from "./result.js";
+import { displayQuestionnairePage } from "./questionnaire.js";
+import { displayReportPage } from "./report.js";
+import { displayDietPage } from "./diet.js";
+import { displayTrainingPage } from "./training.js";
+import { displayResultPage } from "./result.js";
 
 import { sendRequest } from "./request.js";
 
@@ -14,12 +14,7 @@ export function displayPanel() {
         <h3 id="name"></h3>
         <div class="row">
             <div class="col">
-                <p id="questionnaire"></p>
-                <div class="btn-group-vertical" role="group" aria-label="Basic example">
-                    <button type="button" id="report_button" class="btn btn-secondary" btn-lg">Raport</button>
-                    <button type="button" id="diet_button" class="btn btn-secondary" btn-lg">Twoja dieta</button>
-                    <button type="button" id="trening_button" class="btn btn-secondary" btn-lg">Trening/aktywność</button>
-                    <button type="button" id="results_button" class="btn btn-secondary" btn-lg">Podsumowanie wyników</button>
+                <div class="btn-group-vertical" id="panel_tabs" role="group" aria-label="Basic example">
                 </div>
             </div>
             <div class="col">
@@ -30,12 +25,33 @@ export function displayPanel() {
 
     document.getElementById("root").innerHTML = pageContent;
 
-    document.getElementById("report_button").onclick = dispalyReportPage;
-    document.getElementById("diet_button").onclick = dispalyDietPage;
-    document.getElementById("trening_button").onclick = dispalyTreningPage;
-    document.getElementById("results_button").onclick = dispalyResultPage;
+    showPanelTabs(false);
 
-    sendRequest("GET", "/users", null, null, getUsernameCallback);
+    sendRequest("GET", "/users/current_user", null, null, getUsernameCallback);
+}
+
+function showPanelTabs(showQuestionnaire) {
+    let panelTabsHtmlCode = `
+        <button type="button" id="report_button" class="btn btn-secondary" btn-lg">Raport</button>
+        <button type="button" id="diet_button" class="btn btn-secondary" btn-lg">Twoja dieta</button>
+        <button type="button" id="training_button" class="btn btn-secondary" btn-lg">Trening/aktywność</button>
+        <button type="button" id="results_button" class="btn btn-secondary" btn-lg">Podsumowanie wyników</button>
+    `;
+    
+    if(showQuestionnaire) {
+        let questionnaireTab = `<button type="button" id="questionnaire_button" class="btn btn-secondary" btn-lg">Pierwsza ankieta</button>`;
+        
+        document.getElementById("panel_tabs").innerHTML = questionnaireTab + panelTabsHtmlCode;
+
+        document.getElementById("questionnaire_button").onclick = displayQuestionnairePage;
+    } else {
+        document.getElementById("panel_tabs").innerHTML = panelTabsHtmlCode;
+    }
+
+    document.getElementById("report_button").onclick = displayReportPage;
+    document.getElementById("diet_button").onclick = displayDietPage;
+    document.getElementById("training_button").onclick = displayTrainingPage;
+    document.getElementById("results_button").onclick = displayResultPage;
 }
 
 function getUsernameCallback() {
@@ -43,9 +59,5 @@ function getUsernameCallback() {
 
     document.getElementById("name").innerHTML = body.firstName + " " + body.lastName;
 
-    if(body.showQuestionnaire) {
-        document.getElementById("questionnaire").innerHTML = 
-            `<button type="button" id="questionnaire_button" class="btn btn-primary" btn-lg">Pierwsza ankieta</button>`;
-        document.getElementById("questionnaire_button").onclick = dispalyQuestionnairePage;
-    }
+    showPanelTabs(body.showQuestionnaire);
 }
