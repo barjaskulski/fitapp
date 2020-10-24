@@ -1,14 +1,9 @@
 package sda.fitapp.controller;
 
-import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import sda.fitapp.dto.QuestionnaireDto;
-import sda.fitapp.dto.UserResponse;
-import sda.fitapp.entity.LifeStyle;
-import sda.fitapp.entity.ServiceRoles;
-import sda.fitapp.entity.User;
-import sda.fitapp.entity.UserSex;
+import sda.fitapp.entity.UserEntity;
 import sda.fitapp.service.UserService;
 
 import java.util.List;
@@ -23,18 +18,18 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public List<User> getAllUsers() {
+    public List<UserEntity> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @GetMapping("/users/{userId}")
-    public User getUserById(@PathVariable long userId) {
+    public UserEntity getUserById(@PathVariable long userId) {
         return userService.getUserById(userId);
     }
 
     @PostMapping("/users")
-    public User addUser(@RequestBody User user) {
-        return userService.addUser(user);
+    public UserEntity addUser(@RequestBody UserEntity userEntity) {
+        return userService.addUser(userEntity);
     }
 
     @DeleteMapping("/users/{userId}")
@@ -43,8 +38,8 @@ public class UserController {
     }
 
     @GetMapping("/users/current_user")               //----------------------------- for front end dev
-    public User getCurrentUser() {
-        return new User(1,"email@pl","password",
+    public UserEntity getCurrentUser() {
+        return new UserEntity(1,"email@pl","password",
                 "firstN", "lastN", true);
     }
 

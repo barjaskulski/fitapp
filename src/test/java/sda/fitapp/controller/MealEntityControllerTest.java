@@ -4,6 +4,7 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.nio.file.Files;
@@ -17,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @DisplayName("Meal Controller Test")
-class MealControllerTest {
+class MealEntityControllerTest {
 
     @Autowired
     private MockMvc mvc;
@@ -47,7 +48,7 @@ class MealControllerTest {
                         .header("content-type", "application/json")
                         .content(mealString))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{'id': 1}"));
+                .andExpect(content().json("{'name': 'wiadro'}"));
     }
 
     @Test
@@ -60,7 +61,8 @@ class MealControllerTest {
         mvc.perform(
                 get("/api/meal"))
                 .andExpect(status().isOk())
-                .andExpect(content().json("[{'id': 1},{}]"));
+//                .andExpect(content().json("[{'name': 'wiadro'}]"))
+        ;
 
     }
 

@@ -1,6 +1,9 @@
 package sda.fitapp.entity;
 
 import lombok.*;
+import sda.fitapp.ENUM.LifeStyle;
+import sda.fitapp.ENUM.ServiceRoles;
+import sda.fitapp.ENUM.UserSex;
 
 import javax.persistence.*;
 
@@ -8,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class User {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -29,12 +32,17 @@ public class User {
     private int userMealCount;                              //--- to be set by coach
     private boolean showQuestionnaire;
 
-    public User(long userId, String userEmail, String userPassword, String firstName, String lastName, boolean showQuestionnaire) {
+    public UserEntity(long userId, String userEmail, String userPassword, String firstName, String lastName, boolean showQuestionnaire) {
         this.userId = userId;
         this.userEmail = userEmail;
         this.userPassword = userPassword;
         this.firstName = firstName;
         this.lastName = lastName;
         this.showQuestionnaire = showQuestionnaire;
+    }
+
+//    forTest
+    public UserEntity(int i, String gmail, String s, ServiceRoles subscribedUser, String łukasz, String kozłowski, UserSex male, String s1, int i1, int i2, double v, int i3, LifeStyle middle) {
+
     }
 }

@@ -17,7 +17,7 @@ public class QuestionnaireDto {
     private String medicines;
     private String bloodTests;
     private String dayDescription;
-    private String wellbeing;
+    private String wellBeing;
     private String dietType;
     private String dietExclusions;
     private String proteinSupplement;

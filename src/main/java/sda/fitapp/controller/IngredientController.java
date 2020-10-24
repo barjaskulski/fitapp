@@ -2,7 +2,7 @@ package sda.fitapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import sda.fitapp.entity.Ingredient;
+import sda.fitapp.entity.IngredientEntity;
 import sda.fitapp.service.IngredientService;
 
 import java.util.List;
@@ -18,17 +18,17 @@ public class IngredientController {
     }
 
     @PostMapping("/ingredient")
-    public Ingredient addIngredient(@RequestBody Ingredient ingredient) {
-        return ingredientService.addIngredient(ingredient);
+    public IngredientEntity addIngredient(@RequestBody IngredientEntity ingredientEntity) {
+        return ingredientService.addIngredient(ingredientEntity);
     }
 
     @GetMapping("/ingredient/{id}")
-    public Ingredient getIngredient(@PathVariable Long id){
+    public IngredientEntity getIngredient(@PathVariable Long id){
         return ingredientService.getIngredientById(id);
     }
 
     @GetMapping("/ingredient")
-    public List<Ingredient> getAllIngredients(){
+    public List<IngredientEntity> getAllIngredients(){
         return ingredientService.getAllIngredients();
     }
 

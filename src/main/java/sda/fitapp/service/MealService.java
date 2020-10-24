@@ -4,10 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import sda.fitapp.dto.IngredientProportion;
-import sda.fitapp.entity.Meal;
+import sda.fitapp.entity.MealEntity;
 import sda.fitapp.dto.MealRequest;
 import sda.fitapp.entity.WrapperIngredientToProportion;
-import sda.fitapp.repository.JpaIngredientRepository;
 import sda.fitapp.repository.MealRepositories;
 import sda.fitapp.repository.WrapperIngredientProportionRepository;
 
@@ -29,20 +28,20 @@ public class MealService {
         this.ingredientService = ingredientService;
     }
 
-    public Meal addMeal(@RequestBody MealRequest meal) {
+    public MealEntity addMeal(@RequestBody MealRequest meal) {
         List<IngredientProportion> ingredientProportionList = meal.getIngredientWithProportions();
         List<WrapperIngredientToProportion> wrapperIngredientToProportionList = new ArrayList<>();
         for (IngredientProportion el : ingredientProportionList) {
             WrapperIngredientToProportion wrapperEntity = new WrapperIngredientToProportion();
-            wrapperEntity.setIngredient(ingredientService.getIngredientById(el.getIngredientId()));
+            wrapperEntity.setIngredientEntity(ingredientService.getIngredientById(el.getIngredientId()));
             wrapperEntity.setProportion(el.getProportion());
             wrapperIngredientProportionRepository.save(wrapperEntity);
             wrapperIngredientToProportionList.add(wrapperEntity);
         }
 
-        Meal mealEntity = new Meal();
+        MealEntity mealEntity = new MealEntity();
         mealEntity.setWrapperIngredientToProportionList(wrapperIngredientToProportionList);
-        mealEntity.setGLUTENFREE(meal.isGLUTENFREE());
+        mealEntity.setGlutenFree(meal.isGlutenFree());
         mealEntity.setName(meal.getName());
         mealEntity.setLowIg(meal.isLowIg());
         mealEntity.setVegan(meal.isVegan());
@@ -52,12 +51,19 @@ public class MealService {
         return mealRepositories.save(mealEntity);
     }
 
-    public List<Meal> getAllMeal() {
+    public List<MealEntity> getAllMeal() {
         return mealRepositories.findAll();
     }
 
-    public Meal getMealById(Long id) {
+    public MealEntity getMealById(Long id) {
         return mealRepositories.findById(id).orElseThrow(() ->
                 new RuntimeException("No such meal with input id"));
     }
+
+    public void connectTag(Long idMeal,Long idTags ){
+        mealRepositories.findById(idMeal);
+    }
+
+
+
 }

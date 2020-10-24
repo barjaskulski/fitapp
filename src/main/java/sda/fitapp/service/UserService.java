@@ -1,7 +1,7 @@
 package sda.fitapp.service;
 
 import org.springframework.stereotype.Component;
-import sda.fitapp.entity.User;
+import sda.fitapp.entity.UserEntity;
 import sda.fitapp.repositories.UserRepositories;
 
 import java.util.List;
@@ -16,21 +16,21 @@ public class UserService {
         this.userRepositories = userRepositories;
     }
 
-    public List<User> getAllUsers() {
+    public List<UserEntity> getAllUsers() {
         return userRepositories.findAll();
     }
 
-    public User getUserById(long id){
+    public UserEntity getUserById(long id){
         return userRepositories.findById(id).orElseThrow(NoSuchElementException::new);
     }
 
-    public User addUser(User user) {
-        return userRepositories.save(user);
+    public UserEntity addUser(UserEntity userEntity) {
+        return userRepositories.save(userEntity);
     }
 
     public void removeUserById(long id) {
-        User userToDelete = userRepositories.findById(id).orElseThrow(NoSuchElementException::new);
-        userRepositories.delete(userToDelete);
+        UserEntity userEntityToDelete = userRepositories.findById(id).orElseThrow(NoSuchElementException::new);
+        userRepositories.delete(userEntityToDelete);
     }
 
 }
