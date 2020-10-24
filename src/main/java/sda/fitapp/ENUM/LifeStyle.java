@@ -1,4 +1,4 @@
-package sda.fitapp.entity;
+package sda.fitapp.ENUM;
 
 public enum LifeStyle {
     VERYLOW(1.2), LOW(1.4), MIDDLE(1.6), HIGH(1.8), VERYHIGH(2.0);

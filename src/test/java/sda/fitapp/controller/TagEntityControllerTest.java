@@ -1,18 +1,15 @@
 package sda.fitapp.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
-import sda.fitapp.entity.Tag;
-import sda.fitapp.entity.TagsType;
-import static org.mockito.Mockito.reset;
+import sda.fitapp.entity.TagEntity;
+import sda.fitapp.ENUM.TagsType;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import java.nio.file.Files;
@@ -21,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -29,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class TagControllerTest {
+class TagEntityControllerTest {
 
     @Autowired
     private MockMvc mvc;
@@ -55,12 +51,12 @@ class TagControllerTest {
     @Test
     void getAllTags() throws Exception {
         //given
-        List<Tag> expectedTagList = new ArrayList(Arrays.asList(
-                new Tag(1, "wiadro", TagsType.MEAL),
-                new Tag(2, "wiadro", TagsType.MEAL)
+        List<TagEntity> expectedTagEntityList = new ArrayList(Arrays.asList(
+                new TagEntity(1, "wiadro", TagsType.MEAL),
+                new TagEntity(2, "wiadro", TagsType.MEAL)
         ));
         ObjectMapper mapper = new ObjectMapper();
-        String jsonResult = mapper.writeValueAsString(expectedTagList);
+        String jsonResult = mapper.writeValueAsString(expectedTagEntityList);
         String s = new String(Files.readAllBytes(Paths.get("src/test/resources/request/savetag.json")));
 
         //when

@@ -13,7 +13,7 @@ import static lombok.AccessLevel.*;
 @NoArgsConstructor
 @Table(name = "ingredient")
 @SequenceGenerator(name = "ingredient_seq")
-public class Ingredient {
+public class IngredientEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ingredient_seq")
     @Column(name = "id")

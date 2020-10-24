@@ -3,7 +3,7 @@ package sda.fitapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import sda.fitapp.entity.Tag;
+import sda.fitapp.entity.TagEntity;
 import sda.fitapp.repository.TagRepository;
 import sda.fitapp.service.TagService;
 
@@ -23,22 +23,22 @@ public class TagController {
     }
 
     @PostMapping
-    public Tag addTag(@RequestBody Tag tag) {
-        return tagRepository.save(tag);
+    public TagEntity addTag(@RequestBody TagEntity tagEntity) {
+        return tagRepository.save(tagEntity);
     }
 
     @GetMapping
-    public List<Tag> getAllTags() {
+    public List<TagEntity> getAllTags() {
         return tagRepository.findAll();
     }
 
     @GetMapping("/id/{id}")
-    public Tag getTagById(@PathVariable Long id) {
+    public TagEntity getTagById(@PathVariable Long id) {
         return tagRepository.findById(id).orElseThrow(NoSuchElementException::new);
     }
 
     @GetMapping("/name/{name}")
-    public Tag getTagByName(@PathVariable String name) {
+    public TagEntity getTagByName(@PathVariable String name) {
         return tagRepository.findFirstByName(name).orElseThrow(NoSuchElementException::new);
     }
 

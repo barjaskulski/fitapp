@@ -1,7 +1,7 @@
 package sda.fitapp.service;
 
 import org.springframework.stereotype.Service;
-import sda.fitapp.entity.Ingredient;
+import sda.fitapp.entity.IngredientEntity;
 import sda.fitapp.repository.JpaIngredientRepository;
 
 import java.util.List;
@@ -16,20 +16,20 @@ public class IngredientService {
         this.jpaIngredientRepository = jpaIngredientRepository;
     }
 
-    public Ingredient addIngredient(Ingredient ingredient){
-        return jpaIngredientRepository.save(ingredient);
+    public IngredientEntity addIngredient(IngredientEntity ingredientEntity){
+        return jpaIngredientRepository.save(ingredientEntity);
     }
 
-    public Ingredient getIngredientById(Long id) {
+    public IngredientEntity getIngredientById(Long id) {
         return jpaIngredientRepository.findById(id).orElseThrow(NoSuchElementException::new);
     }
 
     public void removeIngredientById(Long id) {
-        Ingredient ingredientToRemove = jpaIngredientRepository.findById(id).orElseThrow(NoSuchElementException::new);
-        jpaIngredientRepository.delete(ingredientToRemove);
+        IngredientEntity ingredientEntityToRemove = jpaIngredientRepository.findById(id).orElseThrow(NoSuchElementException::new);
+        jpaIngredientRepository.delete(ingredientEntityToRemove);
     }
 
-    public List<Ingredient> getAllIngredients() {
+    public List<IngredientEntity> getAllIngredients() {
         return jpaIngredientRepository.findAll();
     }
 }

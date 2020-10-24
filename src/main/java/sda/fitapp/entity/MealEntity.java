@@ -13,7 +13,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @SequenceGenerator(name = "meal_seq")
-public class Meal {
+public class MealEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "meal_seq")
     private long id;
@@ -25,13 +25,13 @@ public class Meal {
     private boolean lowIg;
     private boolean vegetarian;
     private boolean vegan;
-    private boolean GLUTENFREE;
+    private boolean glutenFree;
     @ManyToMany
     @JoinTable(
             name = "tags_meals",
             joinColumns = { @JoinColumn(name = "meal_id") },
             inverseJoinColumns = { @JoinColumn(name = "tag_id") }
     )
-    private List<Tag> tagList = new ArrayList<>();
+    private List<TagEntity> tagEntityList = new ArrayList<>();
 
 }

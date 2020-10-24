@@ -1,4 +1,4 @@
-package sda.fitapp.entity;
+package sda.fitapp.ENUM;
 
 public enum UserSex {
     FEMALE(-161), MALE(6), NOTSPECIFIED(0);

@@ -1,4 +1,4 @@
-package sda.fitapp.entity;
+package sda.fitapp.ENUM;
 
 public enum TagsType {
     MEAL,

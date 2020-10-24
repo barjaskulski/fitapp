@@ -18,7 +18,7 @@ public class WrapperIngredientToProportion {
     Long id;
     @ManyToOne
     @JoinColumn(name = "id_ingredient")
-    Ingredient ingredient;
+    IngredientEntity ingredientEntity;
     Double proportion;
 
 }

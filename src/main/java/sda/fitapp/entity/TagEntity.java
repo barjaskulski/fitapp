@@ -2,6 +2,7 @@ package sda.fitapp.entity;
 
 
 import lombok.*;
+import sda.fitapp.ENUM.TagsType;
 
 import javax.persistence.*;
 
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @SequenceGenerator(name = "tag_id")
-public class Tag {
+public class TagEntity {
     @Id
     @GeneratedValue
     long id;

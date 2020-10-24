@@ -1,21 +1,17 @@
 package sda.fitapp.dto;
 
-import com.fasterxml.jackson.databind.deser.DataFormatReaders;
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import sda.fitapp.entity.User;
-import sda.fitapp.entity.UserSex;
+import sda.fitapp.entity.UserEntity;
 
 @Getter
 public class UserResponse {
     private String firstName;
     private String lastName;
     private long age;
-    private long height;
+    private Double height;
     private double weight;
     private double lifestyle;
-    private long userCaloricDeficit;
+    private Double userCaloricDeficit;
     private long caloricDemandForReduction;
     private long userDemandForProteins;
     private long userDemandForCarbs;
@@ -38,15 +34,15 @@ public class UserResponse {
     private long supperFats;
 
 
-    public UserResponse(User user) {
-        this.firstName = user.getUserName();
-        this.lastName = user.getUserSurname();
-        this.age = user.getUserAge();
-        this.height = user.getUserHeight();
-        this.weight = user.getUserWeight();
-        this.lifestyle = user.getLifeStyle().getNumVal();
-        this.userCaloricDeficit = user.getUserCaloricDeficit();
-        this.caloricDemandForReduction = ((long) ((((9.99 * weight) + (6.25 * height) + (4.92 * age)) + user.getUserSex().getNumVal()) * lifestyle)) - userCaloricDeficit;
+    public UserResponse(UserEntity userEntity) {
+        this.firstName = userEntity.getFirstName();
+        this.lastName = userEntity.getLastName();
+        this.age = userEntity.getUserAge();
+        this.height = userEntity.getUserHeight();
+        this.weight = userEntity.getUserWeight();
+        this.lifestyle = userEntity.getLifeStyle().getNumVal();
+        this.userCaloricDeficit = userEntity.getUserCaloricDeficit();
+        this.caloricDemandForReduction = (long) ((((((9.99 * weight) + (6.25 * height) + (4.92 * age)) + userEntity.getUserSex().getNumVal()) * lifestyle)) - userCaloricDeficit);
         this.userDemandForProteins = (long) weight * 2;
         this.userDemandForFats = Math.round(weight * 0.9);
         this.userDemandForCarbs = (((caloricDemandForReduction) - (userDemandForProteins * 4) - (userDemandForFats * 9)) / 4);
