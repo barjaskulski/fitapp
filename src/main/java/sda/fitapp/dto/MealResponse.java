@@ -1,5 +1,6 @@
 package sda.fitapp.dto;
 
+import lombok.Data;
 import sda.fitapp.entity.IngredientEntity;
 import sda.fitapp.entity.MealEntity;
 import sda.fitapp.entity.TagEntity;
@@ -10,9 +11,8 @@ import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 public class MealResponse {
-    private MealEntity mealEntity;
-    private long id;
     private String name;
     private String recepture;
     private List<WrapperIngredientToProportion> wrapperIngredientToProportionList = new ArrayList<>();
