@@ -1,9 +1,9 @@
 package sda.fitapp.dto;
 
-import lombok.Getter;
+import lombok.Data;
 import sda.fitapp.entity.UserEntity;
 
-@Getter
+@Data
 public class UserResponse {
     private String firstName;
     private String lastName;
